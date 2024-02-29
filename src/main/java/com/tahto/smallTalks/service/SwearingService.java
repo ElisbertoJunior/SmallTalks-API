@@ -40,4 +40,9 @@ public class SwearingService {
         return repository.findById(id).orElseThrow(FindSwearingNullException::new);
     }
 
+    public void delete(Long id) {
+        Swearing swearing = this.getById(id);
+        repository.delete(swearing);
+    }
+
 }
