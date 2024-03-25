@@ -1,6 +1,7 @@
 package com.tahto.smallTalks.service;
 
 import com.tahto.smallTalks.entity.Salutation;
+import com.tahto.smallTalks.exception.SalutationAlreadyExistsNullException;
 import com.tahto.smallTalks.exception.FindSalutationNullException;
 import com.tahto.smallTalks.exception.SalutationNullException;
 import com.tahto.smallTalks.repository.SalutationRepository;
@@ -22,6 +23,12 @@ public class SalutationService {
     public Salutation add(Salutation salutation) {
         if(salutation.getName() == null)
             throw new SalutationNullException();
+
+        List<Salutation> list = this.findAll();
+
+        if(list.contains(salutation)) {
+            throw new SalutationAlreadyExistsNullException();
+        }
 
         return repository.save(salutation);
     }

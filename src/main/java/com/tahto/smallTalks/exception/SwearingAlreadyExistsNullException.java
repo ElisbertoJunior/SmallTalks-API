@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import java.io.Serial;
 
 @ControllerAdvice
-public class AlreadyExistsNullException extends NullPointerException {
+public class SwearingAlreadyExistsNullException extends NullPointerException {
     @Serial
     private static final long serialVersion = 1L;
 }

@@ -1,6 +1,6 @@
 package com.tahto.smallTalks.controller.advice;
 
-import com.tahto.smallTalks.exception.AlreadyExistsNullException;
+import com.tahto.smallTalks.exception.SwearingAlreadyExistsNullException;
 import com.tahto.smallTalks.exception.FindSwearingNullException;
 import com.tahto.smallTalks.exception.SwearingNullException;
 import org.springframework.http.HttpStatus;
@@ -28,7 +28,7 @@ public class SwearingControllerAdvice {
         return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
-    @ExceptionHandler(AlreadyExistsNullException.class)
+    @ExceptionHandler(SwearingAlreadyExistsNullException.class)
     public ResponseEntity<Object> catchAlreadyExists() {
         Map<String, Object> body = new HashMap<>();
         body.put("message", "ERRO: xingamento ja exite na base de dados!");

@@ -1,8 +1,7 @@
 package com.tahto.smallTalks.service;
 
-
 import com.tahto.smallTalks.entity.Swearing;
-import com.tahto.smallTalks.exception.AlreadyExistsNullException;
+import com.tahto.smallTalks.exception.SwearingAlreadyExistsNullException;
 import com.tahto.smallTalks.exception.FindSwearingNullException;
 import com.tahto.smallTalks.exception.SwearingNullException;
 import com.tahto.smallTalks.repository.SwearingRepository;
@@ -26,7 +25,7 @@ public class SwearingService {
         List<Swearing> list = this.getAll();
 
         if(list.contains(swearing)) {
-            throw new AlreadyExistsNullException();
+            throw new SwearingAlreadyExistsNullException();
         }
 
         return repository.save(swearing);

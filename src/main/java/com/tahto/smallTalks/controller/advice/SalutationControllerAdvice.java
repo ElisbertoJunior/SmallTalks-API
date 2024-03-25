@@ -1,6 +1,7 @@
 package com.tahto.smallTalks.controller.advice;
 
 import com.tahto.smallTalks.exception.FindSalutationNullException;
+import com.tahto.smallTalks.exception.SalutationAlreadyExistsNullException;
 import com.tahto.smallTalks.exception.SalutationNullException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,13 @@ public class SalutationControllerAdvice {
     public ResponseEntity<Object> catchFindNullError() {
         Map<String, Object> body = new HashMap<>();
         body.put("message", "ERRO: Saudação não encontrado com este ID");
+        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+    @ExceptionHandler(SalutationAlreadyExistsNullException.class)
+    public ResponseEntity<Object> catchAlreadyExists() {
+        Map<String, Object> body = new HashMap<>();
+        body.put("message", "ERRO: saudação ja exite na base de dados!");
         return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 }
