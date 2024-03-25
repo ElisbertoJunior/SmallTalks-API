@@ -39,6 +39,13 @@ public class SwearingService {
         return repository.findById(id).orElseThrow(FindSwearingNullException::new);
     }
 
+    public Swearing update(Long id, Swearing entrySwearing) {
+        Swearing swearing = this.getById(id);
+
+        swearing.setName(entrySwearing.getName());
+        return repository.save(swearing);
+    }
+
     public void delete(Long id) {
         Swearing swearing = this.getById(id);
         repository.delete(swearing);
