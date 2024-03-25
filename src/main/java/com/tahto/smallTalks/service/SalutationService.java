@@ -13,8 +13,11 @@ import java.util.List;
 @Service
 public class SalutationService {
 
-    @Autowired
-    private SalutationRepository repository;
+    private final SalutationRepository repository;
+
+    public SalutationService(SalutationRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Salutation> findAll() {
         return repository.findAll();
