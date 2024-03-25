@@ -37,6 +37,13 @@ public class ToThankService {
         return repository.findById(id).orElseThrow(FindToThankNullException::new);
     }
 
+    public ToThank update(Long id, ToThank entryToThank) {
+        ToThank toThank = this.getById(id);
+
+        toThank.setName(entryToThank.getName());
+        return repository.save(toThank);
+    }
+
     public void delete(Long id) {
         ToThank toThank = this.getById(id);
         repository.delete(toThank);
