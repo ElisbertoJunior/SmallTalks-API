@@ -33,7 +33,7 @@ public class ToThankController {
         return ResponseEntity.ok().body(service.update(id, toThank));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<List<ToThank>> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.ok().body(service.findAll());

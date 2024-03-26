@@ -19,17 +19,17 @@ public class VerificationService {
 
     private ToThankRepository toThankRepository;
 
-    public VerificationService(SalutationRepository salutationRepository) {
+    public VerificationService(
+            SalutationRepository salutationRepository,
+            SwearingRepository swearingRepository,
+            ToThankRepository toThankRepository
+    ) {
         this.salutationRepository = salutationRepository;
-    }
-
-    public VerificationService(SwearingRepository swearingRepository) {
         this.swearingRepository = swearingRepository;
-    }
-
-    public VerificationService(ToThankRepository toThankRepository) {
         this.toThankRepository = toThankRepository;
     }
+
+
 
     public String verificationSmallTalks(String entry) {
         List<Salutation> salutationList = salutationRepository.findAll();
@@ -37,6 +37,7 @@ public class VerificationService {
         List<ToThank> toThankList = toThankRepository.findAll();
 
         String normalizedString = normalizeString(entry);
+
 
         for(Salutation salutation : salutationList) {
             String salutationName = normalizeString(salutation.getName());
@@ -47,11 +48,29 @@ public class VerificationService {
 
         }
 
+        for(Swearing swearing : swearingLIst) {
+            String swearingName = normalizeString(swearing.getName());
+
+            if(swearingName.equals(normalizedString)) {
+                return "Xingamento";
+            }
+
+        }
+
+        for(ToThank toThank : toThankList) {
+            String toThankName = normalizeString(toThank.getName());
+
+            if(toThankName.equals(normalizedString)) {
+                return "Agradecimento";
+            }
+
+        }
+
         return "Nao e SmallTalks";
     }
 
     private static String normalizeString(String str) {
         return Normalizer.normalize(str.toLowerCase(), Normalizer.Form.NFD)
-                .replaceAll("[^\\p{ASCII}]", "");
+                .replaceAll("[^a-zA-Z0-9\\s]", "");
     }
 }
